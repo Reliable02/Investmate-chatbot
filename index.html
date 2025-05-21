@@ -2,22 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>InvestMate - Your Investment Assistant</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>InvestMate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+    .chat-container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .chat-box {
+      background-color: #e6f0ff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .button {
+      background-color: #2e7d32;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      margin: 8px 0;
+      width: 100%;
+    }
+    .button:hover {
+      background-color: #27642a;
+    }
+    #chatResponse {
+      margin-top: 15px;
+      font-style: italic;
+      color: #333;
+      white-space: pre-line;
+    }
+  </style>
 </head>
 <body>
+
   <div class="chat-container">
-    <div class="chat-header">💬 InvestMate</div>
-    <div class="chat-box" id="chat-box">
-      <div class="bot-message">Hello! 👋 I'm InvestMate, your personal investment assistant. What would you like to do today?</div>
+    <h2>📊 InvestMate</h2>
+    <div class="chat-box">
+      Hello! 👋 I'm InvestMate, your personal investment assistant. What would you like to do today?
     </div>
-    <div class="options" id="options">
-      <button onclick="handleOption('Learn about investing')">📈 Learn about investing</button>
-      <button onclick="handleOption('Explore investment options')">💼 Explore investment options</button>
-      <button onclick="handleOption('Check market trends')">📊 Check market trends</button>
-      <button onclick="handleOption('Ask a question')">❓ Ask a question</button>
+
+    <button class="button">Explore investment options</button>
+
+    <div class="chat-box">
+      What's your goal? 🏠 Buy a house, 🧓 Retire, or 📈 Short-term profit?
     </div>
+
+    <button class="button">✅ Learn about investing</button>
+    <button class="button">💼 Explore investment options</button>
+    <button class="button">📊 Check market trends</button>
+    <button class="button">❓ Ask a question</button>
+
+    <!-- Text input for user questions -->
+    <div style="margin-top: 20px;">
+      <input type="text" id="userInput" placeholder="Type your question..." style="width: 70%; padding: 8px;" />
+      <button onclick="handleUserInput()" style="padding: 8px 12px;">Send</button>
+    </div>
+
+    <!-- Display chatbot response -->
+    <div id="chatResponse"></div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    function handleUserInput() {
+      const input = document.getElementById("userInput").value.trim();
+      const responseBox = document.getElementById("chatResponse");
+
+      if (input === "") {
+        responseBox.innerText = "Please enter a question.";
+        return;
+      }
+
+      let response = "";
+
+      if (input.toLowerCase().includes("stock")) {
+        response = "📈 Stocks can be volatile but offer long-term growth.";
+      } else if (input.toLowerCase().includes("crypto")) {
+        response = "🪙 Cryptocurrency is high-risk, high-reward. Diversify wisely.";
+      } else if (input.toLowerCase().includes("savings")) {
+        response = "💰 Saving regularly builds financial security over time.";
+      } else if (input.toLowerCase().includes("real estate")) {
+        response = "🏘️ Real estate is a long-term investment. Consider location and market trends.";
+      } else {
+        response = "🤖 I'm still learning! Try asking about stocks, crypto, savings, or real estate.";
+      }
+
+      responseBox.innerText = "You: " + input + "\nBot: " + response;
+      document.getElementById("userInput").value = "";
+    }
+  </script>
+
 </body>
-</html> 
+</html>
